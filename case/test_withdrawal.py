@@ -3,21 +3,33 @@ import pytest
 from playwright.sync_api import sync_playwright, expect
 import subprocess
 
+"""
+CCPayment商户后台提现相关：自动化脚本
+1. 上链 TETH
+2. 同一账号商户转商户(内部)
+3. 通过cwallet ID 转账(内部)
+4. 通过cwallet address 转账(内部)
+
+说明：
+1. 商户后台系统 登录部分 
+无法通过接口(拿Token)或自动化(1.邮箱登录人机验证过不了； 2.谷歌登录谷歌检测 自动化操作 不安全)操作登录
+所以只有在执行自动化操作前 手动登录，再打开同一个浏览器进程保持登录状态 来进行操作
+"""
+
 
 @pytest.fixture(scope="class")
 def setup_fixture(request):
-    # chrome_path = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-    chrome_path = '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge'
+    # chrome_path = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' # 用Chrome浏览器
+    chrome_path = '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge'  # 用Edge浏览器
     debugging_port = '--remote-debugging-port=9222'
     user_data_dir = '--user-data-dir=/Users/jaylan/PycharmProjects/PlaywrightUiTest/chrome_cache'
-    # user_data_dir = '--user-data-dir=/chrome_cache'
     command = [chrome_path, debugging_port, user_data_dir]
     # subprocess.Popen(command)
     process = subprocess.Popen(command)
     playwright = sync_playwright().start()
     # 连接已打开浏览器，找好端口
     browser = playwright.chromium.connect_over_cdp("http://127.0.0.1:9222")
-    default_context = browser.contexts[0]  # 注意这里不是browser.new_page()了
+    default_context = browser.contexts[0]
     default_context.tracing.start(screenshots=True, snapshots=True, sources=True)
     page = default_context.pages[0]
 
