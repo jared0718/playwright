@@ -1,0 +1,30 @@
+test_withdrawal_to_network:
+  coin: 'logo TETH'
+  address: '0x12438F04093EBc87f0Ba629bbe93F2451711d967'
+  amount: '0.002'
+  payment_pwd: '111111'
+  verification_code: '123456'
+
+test_withdrawal_to_merchant:
+  coin: 'logo TETH'
+  address: ''
+  amount: '0.002'
+  payment_pwd: '111111'
+  verification_code: '123456'
+
+test_withdrawal_to_cwalletID:
+  coin: 'logo TETH'
+  address: ''
+  amount: '0.002'
+  payment_pwd: '111111'
+  verification_code: '123456'
+
+test_withdrawal_to_cwallet_address:
+  coin: 'logo DOGE'
+  address: 'D5JZrM2UPWZ6uf7o6wzBKzGXQ9fUcPiVNi'
+  chain: 'Dogecoin'
+  amount: '0.002'
+  payment_pwd: '111111'
+  verification_code: '123456'
+
+
