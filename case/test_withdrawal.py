@@ -33,31 +33,12 @@ def setup_fixture(request):
     debugging_port = '--remote-debugging-port=9222'
     user_data_dir = '--user-data-dir=/Users/jaylan/PycharmProjects/PlaywrightUiTest/chrome_cache'
     command = [chrome_path, debugging_port, user_data_dir]
-    # subprocess.Popen(command)
     process = subprocess.Popen(command)
     playwright = sync_playwright().start()
     browser = playwright.chromium.connect_over_cdp("http://127.0.0.1:9222")
     default_context = browser.contexts[0]
     default_context.tracing.start(screenshots=True, snapshots=True, sources=True)
     page = default_context.pages[0]
-
-    # page.goto("https://admin-test-v2.ccpayment.com/dashboard/index")
-
-    # def close_browser():
-    #     browser.close()
-    #     process.terminate()
-    # def setup():
-    #     nonlocal default_context
-    #     # context = browser.new_context()
-    #     # page = context.new_page()
-    #     default_context.tracing.start(screenshots=True, snapshots=True, sources=True)
-    #     page = default_context.pages[0]
-    #     page.goto("https://admin-test-v2.ccpayment.com/dashboard/index")
-    #
-    #     # 启用跟踪功能并设置相关配置
-    #     default_context.tracing.start(screenshots=True, snapshots=True)
-    #
-    #     return page
 
     def teardown():
         default_context.tracing.stop(path='trace.zip')
@@ -76,7 +57,6 @@ class TestTrade:
         """
         上链 TETH
         """
-        # time.sleep(60)
         setup_fixture.goto("https://admin-test-v2.ccpayment.com/dashboard/index")
         setup_fixture.get_by_role("button", name="Balance").click()
         setup_fixture.get_by_role("row", name="logo TETH").get_by_role("button").nth(1).click()
@@ -85,7 +65,6 @@ class TestTrade:
         setup_fixture.get_by_label("Amount").click()
         setup_fixture.get_by_label("Amount").fill("0.002")
         setup_fixture.get_by_role("button", name="Send").click()
-        # time.sleep(2)
         setup_fixture.get_by_label("Payment Password").click()
         setup_fixture.get_by_label("Payment Password").fill("111111")
         setup_fixture.get_by_label("Email Verification Code").click()
@@ -109,7 +88,6 @@ class TestTrade:
         setup_fixture.get_by_label("Amount").click()
         setup_fixture.get_by_label("Amount").fill("0.002")
         setup_fixture.get_by_role("button", name="Send").click()
-        # time.sleep(2)
         setup_fixture.get_by_label("Payment Password").click()
         setup_fixture.get_by_label("Payment Password").fill("111111")
         setup_fixture.get_by_label("Email Verification Code").click()
@@ -158,7 +136,6 @@ class TestTrade:
         setup_fixture.get_by_label("Amount").click()
         setup_fixture.get_by_label("Amount").fill("0.02")
         setup_fixture.get_by_role("button", name="Send").click()
-        # time.sleep(2)
         setup_fixture.get_by_label("Payment Password").click()
         setup_fixture.get_by_label("Payment Password").fill("111111")
         setup_fixture.get_by_label("Email Verification Code").click()
