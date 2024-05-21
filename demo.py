@@ -1,4 +1,4 @@
-# import re
+import re
 import time
 #
 # from playwright.sync_api import Playwright, sync_playwright, expect
@@ -65,22 +65,22 @@ from playwright.sync_api import Playwright, sync_playwright, expect
 from playwright.sync_api import Playwright, sync_playwright
 import subprocess
 
-# 输入 Chrome 浏览器所在路径，并使用双引号将路径括起来
-chrome_path = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-debugging_port = '--remote-debugging-port=9222'
-
-# 使用列表形式表示命令及其参数
-command = [chrome_path, debugging_port]
-subprocess.Popen(command)
-
-
-def run(playwright: Playwright) -> None:
-    browser = playwright.chromium.connect_over_cdp('http://localhost:9222')
-    context = browser.contexts[0]
-    page = context.new_page()
-    page.goto('baidu.com')
-
-
-# 在这里调用 run() 函数
-with sync_playwright() as playwright:
-    run(playwright)
+# # 输入 Chrome 浏览器所在路径，并使用双引号将路径括起来
+# chrome_path = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+# debugging_port = '--remote-debugging-port=9222'
+#
+# # 使用列表形式表示命令及其参数
+# command = [chrome_path, debugging_port]
+# subprocess.Popen(command)
+#
+#
+# def run(playwright: Playwright) -> None:
+#     browser = playwright.chromium.connect_over_cdp('http://localhost:9222')
+#     context = browser.contexts[0]
+#     page = context.new_page()
+#     page.goto('baidu.com')
+#
+#
+# # 在这里调用 run() 函数
+# with sync_playwright() as playwright:
+#     run(playwright)

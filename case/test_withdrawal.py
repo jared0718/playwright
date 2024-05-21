@@ -37,11 +37,11 @@ def setup_fixture(request):
     playwright = sync_playwright().start()
     browser = playwright.chromium.connect_over_cdp("http://127.0.0.1:9222")
     default_context = browser.contexts[0]
-    default_context.tracing.start(screenshots=True, snapshots=True, sources=True)
+    # default_context.tracing.start(screenshots=True, snapshots=True, sources=True)
     page = default_context.pages[0]
 
     def teardown():
-        default_context.tracing.stop(path='trace.zip')
+        # default_context.tracing.stop(path='trace.zip')
         page.close()
         browser.close()
         process.terminate()
